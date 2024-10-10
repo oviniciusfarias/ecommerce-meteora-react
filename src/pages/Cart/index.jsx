@@ -1,0 +1,205 @@
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci"
+import ContainerStyled from "../../components/Container"
+import { IoMdTrash } from "react-icons/io"
+import { formatMoney } from "../../utils/formatMoney"
+import { Link } from "react-router-dom"
+import styled from "styled-components"
+import CartItem from "../../components/Cart/Item"
+import CartTitle from "../../components/Cart/CartTitle"
+import ResumeRow from "../../components/Cart/ResumeRow"
+import Footer from "../../components/Footer"
+
+const PageWrapStyled = styled.main`
+  
+`
+
+const CartBannerWrapStyled = styled.div`
+  width: 100%;
+  height: 10vh;
+  margin-bottom: 64px;
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`
+
+const PageTitleStyled = styled.h1`
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+`
+
+const DetailsWrapStyled = styled.div`
+  background-color: #000;
+  width: 66.66%;
+`
+
+const ResumeWrapStyled = styled.div`
+  width: 33.33%;
+`
+
+const ResumeContainerStyled = styled.div`
+  background-color: #000;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  h2 { 
+    padding: 0;
+    margin-bottom: 32px;
+  }
+  
+`
+
+const ResumeActionsStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 32px;
+  & > a {
+    border: 2px solid #9353FF;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    padding: 16px 8px;
+    flex: 1;
+  }
+  & > a:first-child {
+    color: #9353FF;
+    background-color: #fff;
+  }
+  & > a:last-child {
+    color: #fff;
+    background-color: #9353FF;
+  }
+`
+
+const WrapProductsStyled = styled.div`
+  padding: 0 32px;
+  & > div:first-child {
+    padding-top: 0;
+  }
+`
+
+const ColumnsWrapperStyled = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 64px;
+`
+
+const WithoutProductsStyled = styled.div`
+  & > p {
+    color: #fff;
+  }
+`
+
+const PageCart = ({ 
+    cartProducts,
+    cartTotalValue,
+    cartCount,
+    handleRemoveProduct,
+    handleAddProduct,
+    handleRemoveProductFromCart
+  }) => {
+  return (
+    <>
+      <PageWrapStyled>
+        <CartBannerWrapStyled>
+          <img src="/assets/images/banner-carrinho.png" alt="Carrinho de compras" />
+        </CartBannerWrapStyled>
+
+        <ContainerStyled>
+          <PageTitleStyled>
+            Carrinho de Compras
+          </PageTitleStyled>
+          
+          <ColumnsWrapperStyled>
+            <DetailsWrapStyled>
+              <CartTitle>
+                Detalhes da compra
+              </CartTitle>
+
+              <WrapProductsStyled>
+                {cartProducts.length > 0 
+                ?
+                  cartProducts.map(cartItem => {
+                    return (
+                      <CartItem
+                        key={ cartItem.id }
+                        product={ cartItem }
+                        handleRemoveProduct={ handleRemoveProduct }
+                        handleAddProduct={ handleAddProduct }
+                        handleRemoveProductFromCart={ handleRemoveProductFromCart }
+                      />
+                    )
+                  })
+                :
+                  <WithoutProductsStyled>
+                    <p>
+                      Não há produtos no carrinho
+                    </p>
+                  </WithoutProductsStyled>
+                }
+                
+              </WrapProductsStyled>
+            </DetailsWrapStyled>
+
+            <ResumeWrapStyled>
+              <ResumeContainerStyled>
+                <CartTitle>
+                  Sumário
+                </CartTitle>
+                
+                <ResumeRow 
+                  textLeft={`${cartCount} Produtos`}
+                  textRight={formatMoney(cartTotalValue)}
+                />
+                
+                {cartProducts.length > 0
+                ?
+                  <ResumeRow 
+                    textLeft="Frete"
+                    textRight="R$ 15"
+                  />
+                : ''
+                }
+
+
+                <ResumeRow 
+                  textLeft="Total:"
+                  textRight={ formatMoney(cartTotalValue) }
+                  highlight={ true }
+                />
+              </ResumeContainerStyled>
+
+              <ResumeActionsStyled>
+                {cartProducts.length > 0
+                ?
+                  <>
+                    <Link to="/">
+                      Continuar compra
+                    </Link>
+                    <Link to="/carrinho">
+                      Finalizar compra
+                    </Link>
+                  </>
+                :
+                  <Link to="/">
+                    Adicionar produtos ao carrinho
+                  </Link>
+                }
+              </ResumeActionsStyled>
+
+            </ResumeWrapStyled>
+          </ColumnsWrapperStyled>
+        </ContainerStyled>
+
+      </PageWrapStyled>
+      
+      <Footer />
+    </>
+  )
+}
+
+export default PageCart
