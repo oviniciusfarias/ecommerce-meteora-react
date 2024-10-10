@@ -28,6 +28,10 @@ const DialogContainerStyled = styled.form`
   top: 0;
   bottom: 0;
   overflow: hidden;
+  @media screen and (max-width: 420px) {
+    width: 100%;
+    max-width: 100%;
+  }
 `
 
 const CartHeaderStyled = styled.div`
@@ -35,6 +39,7 @@ const CartHeaderStyled = styled.div`
   padding: 16px 32px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 32px;
 `
 
@@ -42,6 +47,7 @@ const CartHeaderTitleStyled = styled.p`
   color: #fff;
   font-size: 18px;
   font-weight: 600;
+  margin: 0;
 `
 
 const CartCloseButtonStyled = styled.button`

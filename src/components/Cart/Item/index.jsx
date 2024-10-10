@@ -15,16 +15,26 @@ const ProductWrapStyled = styled.div`
 const ProductImgStyled = styled.img`
   width: 20%;
   margin-right: 32px;
+  @media screen and (max-width: 420px) {
+    width: 40%;
+    margin-right: 16px;
+  }
 `
 
 const ProductTitleStyled = styled.h3`
   color: #fff;
   font-size: 16px;
+  @media screen and (max-width: 420px) {
+    margin: 0;
+  }
 `
 
 const ProductDescriptionStyled = styled.p`
   color: #fff;
   font-size: 13px;
+  @media screen and (max-width: 420px) {
+    display: none;
+  }
 `
 
 const ProductPriceStyled = styled.p`
@@ -32,6 +42,11 @@ const ProductPriceStyled = styled.p`
   font-size: 16px;
   width: 30%;
   text-align: center;
+  @media screen and (max-width: 420px) {
+    width: 100%;
+    text-align: left;
+    margin: 0;
+  }
 `
 
 const QuantityContainerStyled = styled.div`
@@ -41,6 +56,10 @@ const QuantityContainerStyled = styled.div`
     color: #fff;
     font-size: 13px;
     font-weight: 600;
+  }
+  @media screen and (max-width: 420px) {
+    width: 100%;
+    text-align: left;
   }
 `
 
@@ -59,11 +78,16 @@ const QuantityActionsStyled = styled.div`
     cursor: pointer;
     border: none;
   }
+  @media screen and (max-width: 420px) {
+    justify-content: flex-start;
+  }
 `
 
 const WrapDescriptionStyled = styled.div`
   width: 40%;
-  
+  @media screen and (max-width: 420px) {
+    width: 100%;
+  }
 `
 
 const ProductDetailsWrapStyled = styled.div`
@@ -72,6 +96,11 @@ const ProductDetailsWrapStyled = styled.div`
   width: 80%;
   gap: 16px;
   padding-right: 32px;
+  @media screen and (max-width: 420px) {
+    flex-wrap: wrap;
+    width: 60%;
+    padding-right: 16px;
+  }
 `
 const ButtonRemoveWrapStyled = styled.div`
   position: absolute;

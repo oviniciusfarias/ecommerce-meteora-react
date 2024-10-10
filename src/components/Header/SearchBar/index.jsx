@@ -25,6 +25,10 @@ const InputStyled = styled.input`
   padding: 0px 14px;
   max-width: 170px;
   font-size: 14px;
+  @media screen and (max-width: 420px) {
+    flex-grow: 1;
+    max-width: 100%;
+  }
 `
 
 const SearchBar = () => {

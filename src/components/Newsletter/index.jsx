@@ -5,6 +5,9 @@ const NewsletterSectionStyled = styled.section`
   max-width: 620px;
   border: 2px solid #000;
   padding: 40px 16px;
+  @media screen and (max-width: 420px) {
+    max-width: 85vw;
+  }
 `
 
 const NewsletterTitleStyled = styled.h2`
@@ -27,6 +30,7 @@ const NewsletterInputStyled = styled.input`
   border-right: none;
   color: #6C757D;
   padding: 8px 16px;
+  min-width: 0;
 `
 
 const NewsletterButtonStyled = styled.button`

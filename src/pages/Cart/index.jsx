@@ -10,7 +10,12 @@ import ResumeRow from "../../components/Cart/ResumeRow"
 import Footer from "../../components/Footer"
 
 const PageWrapStyled = styled.main`
-  
+  & > div {
+    @media screen and (max-width: 420px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
 `
 
 const CartBannerWrapStyled = styled.div`
@@ -33,10 +38,16 @@ const PageTitleStyled = styled.h1`
 const DetailsWrapStyled = styled.div`
   background-color: #000;
   width: 66.66%;
+  @media screen and (max-width: 420px) {
+    width: 100%;
+  }
 `
 
 const ResumeWrapStyled = styled.div`
   width: 33.33%;
+  @media screen and (max-width: 420px) {
+    width: 100%;
+  }
 `
 
 const ResumeContainerStyled = styled.div`
@@ -48,7 +59,6 @@ const ResumeContainerStyled = styled.div`
     padding: 0;
     margin-bottom: 32px;
   }
-  
 `
 
 const ResumeActionsStyled = styled.div`
@@ -56,6 +66,11 @@ const ResumeActionsStyled = styled.div`
   justify-content: space-between;
   gap: 16px;
   margin-top: 32px;
+  @media screen and (max-width: 420px) {
+    padding-left: 32px;
+    padding-right: 32px;
+    flex-direction: column;
+  }
   & > a {
     border: 2px solid #9353FF;
     text-decoration: none;
@@ -86,6 +101,9 @@ const ColumnsWrapperStyled = styled.div`
   justify-content: space-between;
   gap: 32px;
   margin-bottom: 64px;
+  @media screen and (max-width: 420px) {
+    flex-direction: column;
+  }
 `
 
 const WithoutProductsStyled = styled.div`

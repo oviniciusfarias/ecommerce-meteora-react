@@ -4,13 +4,24 @@ import ContainerStyled from "../Container"
 import Menu from "./Menu"
 import SearchBar from "./SearchBar"
 import CartButton from "./CartButton"
+import { FiMenu } from "react-icons/fi"
 
 const HeaderStyled = styled.header`
   background-color: #000000;
   padding: 20px 0;
+  position: relative;
+  z-index: 2;
   & > div {
     max-width: 100%;
     padding: 0 64px;
+    @media screen and (max-width: 420px) {
+      padding: 0 32px;
+    }
+  }
+  & > div > div > a {
+    @media screen and (max-width: 420px) {
+      flex-grow: 1;
+    }
   }
 `
 
@@ -20,32 +31,65 @@ const HeaderWrapperStyled = styled.div`
   justify-content: space-between;
 `
 
-const HeaderColumnStyled = styled.div`
+const HeaderMenuMobileWrapStyled = styled.div`
   display: flex;
-  gap: 32px;
+  @media screen and (max-width: 420px) {
+    display: ${props => props.$menuVisible ? 'flex' : 'none'};
+    position: absolute;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    top: 100%;
+    z-index: 166;
+    background-color: #000;
+    padding: 16px 32px;
+  }
 `
 
-const Header = ({ cartCount, handleCartDisplay }) => {
+const ButtonMenuStyled = styled.button`
+  padding: 4px 8px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  margin-right: -8px;
+`
+
+const Header = ({ 
+    cartCount, 
+    handleCartDisplay,
+    menuVisible = true,
+    handleMenuVisibility
+  }) => {
+  
   return (
     <HeaderStyled>
       <ContainerStyled>
         <HeaderWrapperStyled>
-          <HeaderColumnStyled>
-            <Link to="/">
-              <img src="/assets/images/logo-meteora.png" alt="Meteora" />
-            </Link>
+          
+          <Link to="/">
+            <img src="/assets/images/logo-meteora.png" alt="Meteora" />
+          </Link>
 
+          <HeaderMenuMobileWrapStyled
+            $menuVisible={menuVisible}
+          >
             <Menu />
-          </HeaderColumnStyled>
-
-          <HeaderColumnStyled>
             <SearchBar />
-            
-            <CartButton
-              handleCartDisplay={handleCartDisplay}
-              cartCount={cartCount}
-            />
-          </HeaderColumnStyled>
+          </HeaderMenuMobileWrapStyled>
+
+          <CartButton
+            handleCartDisplay={handleCartDisplay}
+            cartCount={cartCount}
+          />
+
+          <ButtonMenuStyled
+            type="button"
+            onClick={() => handleMenuVisibility()}
+          >
+            <FiMenu size={32} />
+          </ButtonMenuStyled>
         </HeaderWrapperStyled>
       </ContainerStyled>
     </HeaderStyled>

@@ -12,6 +12,9 @@ const ButtonStyled = styled.button`
   display: ${props => props.$pageCart ? 'none' : 'inline-flex'};
   align-items: center;
   cursor: pointer;
+  @media screen and (max-width: 420px) {
+    margin-left: 64px;
+  }
 `
 
 const CartCountStyled = styled.span`

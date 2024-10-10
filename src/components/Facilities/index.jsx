@@ -16,6 +16,10 @@ const SectionStyled = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
+    
+    @media screen and (max-width: 420px) {
+      padding: 0;
+    }
   }
 `
 
@@ -23,6 +27,9 @@ const WrapperFacilitiesStyled = styled.div`
   display: flex;
   max-width: 976px;
   gap: 32px;
+  @media screen and (max-width: 420px) {
+    flex-direction: column;
+  }
 `
 
 const Facilities = () => {

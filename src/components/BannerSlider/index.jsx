@@ -56,6 +56,10 @@ const ImgStyled = styled.img`
   width: 100%;
   /* max-height: 415px; */
   object-fit: cover;
+  @media screen and (max-width: 420px) {
+    height: 415px;
+    object-position: ${props => props.$coverCenter ? 'center' : 'left'};
+  }
 `
 
 const BannerTitleStyled = styled.h2`
@@ -86,7 +90,7 @@ const BannerSlider = () => {
           return (
             <SwiperSlide key={banner.id}>
               <BannerWrapStyled>
-                <ImgStyled src={banner.src} alt={banner.alt} />
+                <ImgStyled src={banner.src} alt={banner.alt}  $coverCenter={banner.itemCarrossel}/>
                 {banner.itemCarrossel && <BannerTextContentStyled>
                   <BannerTitleStyled>
                     { banner.itemCarrossel.titulo }

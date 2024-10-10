@@ -15,6 +15,9 @@ const ProductsWrapperStyled = styled.div`
   gap: 30px;
   & > div { 
     width: calc(33.33% - 20px);
+    @media screen and (max-width: 420px) {
+      width: calc(100%);
+    }
   }
 `
 

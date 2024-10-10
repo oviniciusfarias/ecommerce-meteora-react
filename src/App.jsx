@@ -14,9 +14,26 @@ function App() {
   const [cartCount, setCartCount] = useState(0)
   const [cartProducts, setCartProducts] = useState([])
   const [cartTotalValue, setCartTotalValue] = useState(0)
+  const [menuIsVisible, setMenuVisibility] = useState(false)
 
-  const HandleCartDrawerDisplay = () => {
-    setCartDrawerStatus(!cartDrawerStatus)
+  const HandleMenuVisibility = (status) => {
+    
+    console.log('HandleMenuVisibility', status)
+
+    if (status === true || status === false) {
+      setMenuVisibility(status)
+    } else {
+      setMenuVisibility(!menuIsVisible)
+    }
+  }
+
+  const HandleCartDrawerDisplay = (status) => {
+    
+    if (status === true || status === false) {
+      setCartDrawerStatus(status)
+    } else {
+      setCartDrawerStatus(!cartDrawerStatus)
+    }
   }
 
   const changeQuantity = (id, quantity) => {
@@ -98,7 +115,9 @@ function App() {
 
       <Header
         handleCartDisplay={HandleCartDrawerDisplay}
+        menuVisible={menuIsVisible}
         cartCount={cartCount}
+        handleMenuVisibility={HandleMenuVisibility}
       />
 
       <Routes>
