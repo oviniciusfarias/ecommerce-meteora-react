@@ -29,10 +29,20 @@ const HeaderWrapperStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  & > a {
+    margin-right: 64px;
+    @media screen and (max-width: 420px) {
+      margin-right: 0;
+    }
+  }
 `
 
 const HeaderMenuMobileWrapStyled = styled.div`
   display: flex;
+  flex: 1;
+  & > nav {
+    flex: 1;
+  }
   @media screen and (max-width: 420px) {
     display: ${props => props.$menuVisible ? 'flex' : 'none'};
     position: absolute;
@@ -51,9 +61,12 @@ const ButtonMenuStyled = styled.button`
   background-color: transparent;
   color: #fff;
   border: none;
-  display: inline-flex;
   align-items: center;
   margin-right: -8px;
+  display: none;
+  @media screen and (max-width: 420px) {
+    display: inline-flex;
+  }
 `
 
 const Header = ({ 
