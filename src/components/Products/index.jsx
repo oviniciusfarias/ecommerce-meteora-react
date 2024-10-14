@@ -4,6 +4,9 @@ import SectionTitleStyled from "../SectionTitle"
 import ProductsList from '../../mocks/produtos.json'
 import Product from "./Product"
 import styled from "styled-components"
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
+import { useCartContext } from "../../hooks/useCartContext"
 
 const SectionProductsStyled = styled.section`
   margin-bottom: 84px;
@@ -21,7 +24,10 @@ const ProductsWrapperStyled = styled.div`
   }
 `
 
-const Products = ({ handleAddProduct }) => {
+// const Products = ({ handleAddProduct }) => {
+const Products = () => {
+  const { addProduct } = useCartContext()
+  
   return (
     <SectionProductsStyled>
       <ContainerStyled>
@@ -30,8 +36,8 @@ const Products = ({ handleAddProduct }) => {
         <ProductsWrapperStyled>
           {ProductsList.map(product => {
             return (
-              <Product 
-                handleAddProduct={handleAddProduct}
+              <Product
+                handleAddProduct={addProduct}
                 key={product.id}
                 product={product}
               />
@@ -41,7 +47,7 @@ const Products = ({ handleAddProduct }) => {
       </ContainerStyled>
     </SectionProductsStyled>
   )
-  
+
 }
 
 export default Products

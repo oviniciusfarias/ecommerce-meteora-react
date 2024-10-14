@@ -1,10 +1,12 @@
-import { Link, NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import styled from "styled-components"
 import ContainerStyled from "../Container"
 import Menu from "./Menu"
 import SearchBar from "./SearchBar"
 import CartButton from "./CartButton"
 import { FiMenu } from "react-icons/fi"
+import { useState } from "react"
+import { useCartContext } from "../../hooks/useCartContext"
 
 const HeaderStyled = styled.header`
   background-color: #000000;
@@ -69,12 +71,18 @@ const ButtonMenuStyled = styled.button`
   }
 `
 
-const Header = ({ 
-    cartCount, 
-    handleCartDisplay,
-    menuVisible = true,
-    handleMenuVisibility
-  }) => {
+const Header = () => {
+
+  const { cartCount, openCartDrawer } = useCartContext()
+  
+  const [menuIsVisible, setMenuVisibility] = useState(false)
+  const handleMenuVisibility = (menuStatus) => {
+    if (menuStatus === true || menuStatus === false) {
+      setMenuVisibility(menuStatus)
+    } else {
+      setMenuVisibility(!menuIsVisible)
+    }
+  }
   
   return (
     <HeaderStyled>
@@ -86,15 +94,15 @@ const Header = ({
           </Link>
 
           <HeaderMenuMobileWrapStyled
-            $menuVisible={menuVisible}
+            $menuVisible={menuIsVisible}
           >
             <Menu />
             <SearchBar />
           </HeaderMenuMobileWrapStyled>
 
           <CartButton
-            handleCartDisplay={handleCartDisplay}
             cartCount={cartCount}
+            handleOpenCartDrawer={openCartDrawer}
           />
 
           <ButtonMenuStyled

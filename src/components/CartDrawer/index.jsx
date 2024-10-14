@@ -3,7 +3,9 @@ import CartProduct from "./Product"
 import { Link, useLocation } from "react-router-dom"
 import styled from "styled-components"
 import { formatMoney } from "../../utils/formatMoney"
-import { useEffect } from "react"
+import { useContext, useEffect, useRef, useState } from "react"
+import { CartContext } from "../../context/CartContext"
+import { useCartContext } from "../../hooks/useCartContext"
 
 const DialogStyled = styled.dialog`
   position: fixed;
@@ -17,6 +19,9 @@ const DialogStyled = styled.dialog`
   height: 100%;
   padding: 0;
   border: none;
+  margin: 0;
+  max-width: 100vw;
+  max-height: 100vh;
 `
 
 const DialogContainerStyled = styled.form`
@@ -31,6 +36,17 @@ const DialogContainerStyled = styled.form`
   @media screen and (max-width: 420px) {
     width: 100%;
     max-width: 100%;
+  }
+`
+
+const BackdropStyled = styled.div`
+  position: absolute;
+  width: calc(100% - 440px);
+  left: 0;
+  top: 0;
+  bottom: 0;
+  @media screen and (max-width: 420px) {
+    display: none;
   }
 `
 
@@ -80,7 +96,6 @@ const WrapProductsStyled = styled.div`
   }
 `
 
-
 const CartFooterStyled = styled.div`
   padding: 0 32px;
   & > a {
@@ -115,42 +130,60 @@ const CartPriceWrapperStyled = styled.div`
   }
 `
 
-const CartDrawer = ({ 
-    products, 
-    cartDrawerStatus, 
-    cartTotalValue,
-    handleCartDisplay,
-    handleAddProduct,
-    handleRemoveProduct,
-    handleRemoveProductFromCart
-  }) => {
+// const CartDrawer = ({ 
+//     products, 
+//     cartDrawerStatus, 
+//     cartTotalValue,
+//     handleCartDisplay,
+//     handleAddProduct,
+//     handleRemoveProduct,
+//     handleRemoveProductFromCart
+//   }) => {
+const CartDrawer = () => {
 
-  const { pathname } = useLocation()
-  
-  useEffect(() => {
-    handleCartDisplay(false)
-  }, [pathname])
+  const location = useLocation()
+  const { cartProducts } = useContext(CartContext)
+  const { 
+    addProduct, 
+    removeProduct, 
+    removeProductFromCart,
+    cartTotalValue,
+    cartCount,
+    cartDrawerStatus,
+    setCartDrawerStatus,
+    refCartDrawer,
+    handleCartDisplay,
+    openCartDrawer,
+    closeCartDrawer
+  } = useCartContext()
+
+  // useEffect(() => {
+  //   handleCartDisplay(false)
+  // }, [pathname])
 
   return (
-    <DialogStyled open={cartDrawerStatus} id="cartDrawer">
+    <DialogStyled id="cartDrawer" ref={refCartDrawer}>
+      <BackdropStyled
+        onClick={() => closeCartDrawer()}
+      />
       <DialogContainerStyled method="dialog">
         <CartHeaderStyled>
           <CartHeaderTitleStyled>Carrinho de Compras</CartHeaderTitleStyled>
 
-          <CartCloseButtonStyled formMethod="dialog" onClick={handleCartDisplay}>
+          <CartCloseButtonStyled onClick={closeCartDrawer}>
             <IoMdClose size={26} color="#fff" />
           </CartCloseButtonStyled>
         </CartHeaderStyled>
 
         <WrapProductsStyled>
-          {products.map(item => {
+          {cartProducts.map(item => {
             return (
-              <CartProduct 
-                key={ item.id } 
-                product={ item }
-                handleAddProduct={handleAddProduct}
-                handleRemoveProduct={handleRemoveProduct}
-                handleRemoveProductFromCart={handleRemoveProductFromCart}
+              <CartProduct
+                key={item.id}
+                product={item}
+                handleAddProduct={addProduct}
+                handleRemoveProduct={removeProduct}
+                handleRemoveProductFromCart={removeProductFromCart}
               />
             )
           })}
@@ -159,10 +192,13 @@ const CartDrawer = ({
         <CartFooterStyled>
           <CartPriceWrapperStyled>
             <span>Total:</span>
-            <span>{ formatMoney(cartTotalValue) }</span>
+            <span>{formatMoney(cartTotalValue)}</span>
           </CartPriceWrapperStyled>
 
-          <Link to="/carrinho">
+          <Link 
+            to="/carrinho" 
+            onClick={() => closeCartDrawer()}
+          >
             Finalizar compra
           </Link>
         </CartFooterStyled>

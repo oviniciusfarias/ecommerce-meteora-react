@@ -21,7 +21,7 @@ const CartCountStyled = styled.span`
   margin-left: 4px;
 `
 
-const CartButton = ({ cartCount, handleCartDisplay }) => {
+const CartButton = ({ cartCount, handleOpenCartDrawer }) => {
 
   const location = useLocation();
   const isCartPage = location.pathname === "/carrinho"
@@ -29,7 +29,7 @@ const CartButton = ({ cartCount, handleCartDisplay }) => {
   return (
     <ButtonStyled
       $pageCart={isCartPage}
-      onClick={handleCartDisplay}
+      onClick={() => handleOpenCartDrawer()}
     >
       <CartIconStyled src="/assets/cart.svg" />
       <CartCountStyled>{ cartCount }</CartCountStyled>

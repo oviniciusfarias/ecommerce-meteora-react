@@ -1,8 +1,23 @@
-# React + Vite
+# E-commere Meteora
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto desenvolvido durante estudos sobre react.
 
-Currently, two official plugins are available:
+Conceitos abordados nesse projeto:
+- React
+- CSS in JS
+- React Router
+- useEffect
+- useState
+- useContext
+- useMemo
+- useReducer
+- Context API
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Pacotes utilizados:
+- React Icons
+- Swiper
+- Styled Components
+
+---- 
+
+Figma do projeto: https://www.figma.com/design/vi4B2iyPM3oisBq8MQmxTt/React%3A-gerencie-estados-globalmente-com-Context-API-%7C-Meteora-(Community)?node-id=2386-2430&node-type=canvas&t=BRU7CcjlCO5Ac1Qz-0

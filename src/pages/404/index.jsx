@@ -1,6 +1,13 @@
+import Header from "../../components/Header"
+
 const Page404 = () => {
   return (
-    <p>Página não encontrada</p>
+    <>
+      <Header />
+      <main>
+        <p>Página não encontrada</p>
+      </main>
+    </>
   )
 }
 

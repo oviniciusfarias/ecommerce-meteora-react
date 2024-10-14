@@ -8,6 +8,10 @@ import CartItem from "../../components/Cart/Item"
 import CartTitle from "../../components/Cart/CartTitle"
 import ResumeRow from "../../components/Cart/ResumeRow"
 import Footer from "../../components/Footer"
+import Header from "../../components/Header"
+import { useContext } from "react"
+import { CartContext } from "../../context/CartContext"
+import { useCartContext } from "../../hooks/useCartContext"
 
 const PageWrapStyled = styled.main`
   & > div {
@@ -112,16 +116,29 @@ const WithoutProductsStyled = styled.div`
   }
 `
 
-const PageCart = ({ 
-    cartProducts,
+// const PageCart = ({ 
+//     cartProducts,
+//     cartTotalValue,
+//     cartCount,
+//     handleRemoveProduct,
+//     handleAddProduct,
+//     handleRemoveProductFromCart
+//   }) => {
+const PageCart = () => {
+
+  const { cartProducts } = useContext(CartContext)
+  const {
+    addProduct,
+    removeProduct,
+    removeProductFromCart,
     cartTotalValue,
-    cartCount,
-    handleRemoveProduct,
-    handleAddProduct,
-    handleRemoveProductFromCart
-  }) => {
+    cartCount
+  } = useCartContext()
+
   return (
     <>
+      <Header />
+
       <PageWrapStyled>
         <CartBannerWrapStyled>
           <img src="/assets/images/banner-carrinho.png" alt="Carrinho de compras" />
@@ -146,9 +163,9 @@ const PageCart = ({
                       <CartItem
                         key={ cartItem.id }
                         product={ cartItem }
-                        handleRemoveProduct={ handleRemoveProduct }
-                        handleAddProduct={ handleAddProduct }
-                        handleRemoveProductFromCart={ handleRemoveProductFromCart }
+                        handleRemoveProduct={ removeProduct }
+                        handleAddProduct={ addProduct }
+                        handleRemoveProductFromCart={ removeProductFromCart }
                       />
                     )
                   })
